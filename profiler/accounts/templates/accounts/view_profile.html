@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+
+<h1>This is the user profile page!</h1>
+
+<div class="container">
+   
+    <h1>Profile</h1>
+    <p>ID: {{ user.userprofile.user_id }}</p>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Date of Birth: {{ user.userprofile.date_of_birth }}</p>
+    <p>Bio: {{ user.userprofile.bio }}</p>
+
+    {% if user.userprofile.avatar %}
+    <img src="{{ user.userprofile.avatar.url }}" width="240">
+    {% endif %}
+    <br>
+
+    <a href="{% url 'accounts:edit_profile'%}" class="button">Edit</a>
+        
+</div>
+
+{% endblock %}
