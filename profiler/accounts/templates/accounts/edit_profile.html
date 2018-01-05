@@ -1,35 +1,13 @@
 {% extends "layout.html" %}
+{% load static from staticfiles %}
 
 {% block title %}Edit Profile | {{ super }}{% endblock %}
 
 {% block body %}
-<form enctype="multipart/form-data" method="POST" action="/accounts/edit_profile/">
+<form enctype="multipart/form-data" method="POST" action="{% url 'accounts:edit_profile' %}">
     {% csrf_token %}
-    <p><label for="id_username">Username:</label> <input type="text" name="username" value={{ user.username }} maxlength="150" id="id_username" required /> <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
-    <p><label for="id_last_name">Last name:</label> <input type="text" name="last_name" value={{ user.last_name }} maxlength="30" id="id_last_name" /></p>
-    <p><label for="id_email">Email address:</label> <input type="email" name="email" value={{ user.email }} maxlength="254" id="id_email" /></p>
-    <p><label for="id_bio">Bio:</label> <input type="text" name="bio" value={{ user.userprofile.bio }} maxlength="300" id="id_bio" required /></p>
-    <p><label for="id_avatar">Avatar:</label> Currently: <a href="{{ user.userprofile.avatar.url }}">{{ user.userprofile.avatar }}</a><br />
-        Change:
-        <input type="file" name="avatar" id="id_avatar" /></p>
-            <input type="submit" class="button-primary" value="Save Changes">
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input type="submit" class="button-primary" value="Submit Changes">
 </form>
-
-
-
-
-{% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }} {{ field }}{{ field.label }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }} {{ field }}  {{ field.label }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
 {% endblock %}
