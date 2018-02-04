@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
                                                        '%d/%m/%y'],
                                        )
     bio = forms.CharField(max_length=300, min_length=10)
-    avatar = forms.ImageField()
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
@@ -33,7 +33,6 @@ class SignUpForm(UserCreationForm):
     def save(self, commit=True):
         if not commit:
             raise NotImplementedError("Can't create User and UserProfile without database save")
-        print("here")    
         user = super(SignUpForm, self).save(commit=True)
         user_profile = UserProfile(user=user,
                                    date_of_birth=self.cleaned_data['date_of_birth'],

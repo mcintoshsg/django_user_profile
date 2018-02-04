@@ -38,6 +38,9 @@ def sign_in(request):
                     request,
                     "Username or password is incorrect."
                 )
+        else:
+            print('error occurred on form') 
+            print(form.error_messages)       
     return render(request, 'accounts/sign_in.html', {'form': form})
 
 
@@ -61,8 +64,6 @@ def sign_up(request):
             return HttpResponseRedirect(reverse('accounts:view_profile'))
         else:
             print(form.error_messages)
-            print(form.cleaned_data['password1'])
-            print(form.cleaned_data['password2'])
     return render(request, 'accounts/sign_up.html', {'form': form})
 
 @login_required
@@ -92,7 +93,7 @@ def edit_profile(request):
             profile_form.save()
             return HttpResponseRedirect(reverse('accounts:view_profile'))
         else:
-            print('error occurred on form')
+           print('error occured on form')
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = EditProfileForm(instance=request.user.userprofile)
