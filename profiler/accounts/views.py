@@ -48,7 +48,6 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
-            print("here")
             form.save()
             user = authenticate(
                 username=form.cleaned_data['username'],
@@ -61,7 +60,9 @@ def sign_up(request):
             )
             return HttpResponseRedirect(reverse('accounts:view_profile'))
         else:
-            print('error occurred on form')
+            print(form.error_messages)
+            print(form.cleaned_data['password1'])
+            print(form.cleaned_data['password2'])
     return render(request, 'accounts/sign_up.html', {'form': form})
 
 @login_required

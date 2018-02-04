@@ -12,7 +12,7 @@ class SignUpForm(UserCreationForm):
     date_of_birth = forms.DateTimeField(label='Date of Birth',
                                         input_formats=['%Y-%m-%d',
                                                        '%m/%d/%Y',
-                                                       '%m/%d/%y'],
+                                                       '%d/%m/%y'],
                                        )
     bio = forms.CharField(max_length=300, min_length=10)
     avatar = forms.ImageField()
@@ -28,7 +28,6 @@ class SignUpForm(UserCreationForm):
             'password2',
             'date_of_birth',
             'bio',
-            'avatar',
         )
 
     def save(self, commit=True):
