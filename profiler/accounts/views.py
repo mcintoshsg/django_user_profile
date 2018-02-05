@@ -39,8 +39,8 @@ def sign_in(request):
                     "Username or password is incorrect."
                 )
         else:
-            print('error occurred on form') 
-            print(form.error_messages)       
+           print('errors....') 
+           print(form.error_messages)       
     return render(request, 'accounts/sign_in.html', {'form': form})
 
 
