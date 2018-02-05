@@ -47,7 +47,6 @@ def sign_in(request):
 def sign_up(request):
     ''' sign_up view for our accounts application '''
     form = SignUpForm()
-    print(request.method)
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
