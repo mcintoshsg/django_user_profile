@@ -48,7 +48,9 @@ class SignUpForm(UserCreationForm):
 
 class EditProfileForm(forms.ModelForm):
     ''' form to allow changes to the UserProfile '''
-    bio = forms.CharField(max_length=300, min_length=10)
+    bio = forms.CharField(max_length=300, 
+                          min_length=10,
+                          help_text='Use at least 10 characters.')
 
     class Meta:
         model = UserProfile
