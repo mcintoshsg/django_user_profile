@@ -1,4 +1,3 @@
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import update_session_auth_hash
@@ -11,7 +10,7 @@ from django.shortcuts import get_object_or_404, render
 
 from accounts.forms import (SignUpForm,
                             EditProfileForm,
-                            UserUpdateForm)                           
+                            UserUpdateForm)
 from accounts.models import UserProfile
 
 
@@ -39,8 +38,7 @@ def sign_in(request):
                     "Username or password is incorrect."
                 )
         else:
-           print('errors....') 
-           print(form.error_messages)       
+            print(form.error_messages)
     return render(request, 'accounts/sign_in.html', {'form': form})
 
 
@@ -65,6 +63,7 @@ def sign_up(request):
             print(form.error_messages)
     return render(request, 'accounts/sign_up.html', {'form': form})
 
+
 @login_required
 def sign_out(request):
     ''' sign out view for the accounts application '''
@@ -72,12 +71,17 @@ def sign_out(request):
     messages.success(request, "You've been signed out. Come back soon!")
     return HttpResponseRedirect(reverse('home'))
 
+
 @login_required
 def view_profile(request):
     ''' user profile view for the accounts application '''
     profile = get_object_or_404(UserProfile, user=request.user)
-    context = {'user': request.user, 'avatar': request.FILES, 'profile': profile}
+    context = {'user': request.user,
+               'avatar': request.FILES,
+               'profile': profile
+               }
     return render(request, 'accounts/view_profile.html', context)
+
 
 @login_required
 def edit_profile(request):
@@ -92,16 +96,15 @@ def edit_profile(request):
             profile_form.save()
             return HttpResponseRedirect(reverse('accounts:view_profile'))
         else:
-           print('error occured on form')
+            print('error occured on form')
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = EditProfileForm(instance=request.user.userprofile)
         return render(request, 'accounts/edit_profile.html',
-                      {'user_form': user_form,
-                       'profile_form': profile_form
-                      })
+                      {'user_form': user_form, 'profile_form': profile_form})                     
 
-@login_required                      
+
+@login_required
 def change_password(request):
     ''' a view to allow users to change their password '''
     if request.method == 'POST':
@@ -109,7 +112,9 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request,
+                             'Your password was successfully updated!'
+                             )
             return HttpResponseRedirect(reverse('accounts:view_profile'))
         else:
             messages.error(request, 'Please correct the error below.')

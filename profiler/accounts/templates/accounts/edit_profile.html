@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load static from staticfiles %}
 
-{% block title %}Edit Profile | {{ super }}{% endblock %}
+{% block title %}Edit Profile | {{user.first_name|capfirst }} {{user.last_name|capfirst}}{% endblock %}
 
 {% block body %}
 <form enctype="multipart/form-data" method="POST" action="{% url 'accounts:edit_profile' %}">

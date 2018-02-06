@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}User Profile{% endblock %}
+{% block title %}User Profile | {{user.first_name|capfirst }} {{user.last_name|capfirst}}{% endblock %}
 
 {% block body %}
 
