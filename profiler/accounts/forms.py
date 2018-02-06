@@ -9,7 +9,9 @@ from accounts.models import UserProfile
 
 
 class SignUpForm(UserCreationForm):
-    ''' extends the built-in user creation form, so as to add in our extra data '''
+    ''' extends the built-in user creation form, so as to add in
+     our extra data '''
+    
     date_of_birth = forms.DateTimeField(label='Date of Birth',
                                         input_formats=['%Y-%m-%d',
                                                        '%m/%d/%Y',

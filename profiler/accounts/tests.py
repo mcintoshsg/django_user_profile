@@ -184,15 +184,3 @@ class UserFormTests(TestCase):
     def test_UserUpdateForm_valid(self):
         form = UserUpdateForm(data=update_data)
         self.assertTrue(form.is_valid())
- 
-    def test_email_field_output(self):
-        self.assertFieldOutput(EmailField,
-                               {'s.mcintosh@test.com': 's.mcintosh@test.com'},
-                               {'s.test.com': ['Enter a valid email address.']}
-                               )
-
-    def test_bio_field_output(self):
-        self.assertFieldOutput(CharField,
-                               {'this is my life': 'this is my life'},
-                               {'life': ['Use at least 10 characters.']}
-                               )
